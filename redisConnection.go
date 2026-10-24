@@ -38,6 +38,14 @@ func main() {
 	*/
 
 	for {
+		/*
+			listener.Accept()?
+			kernel manages a queue of connection objects which are
+			pending to be accepted by their respective port servers
+			listener.Accept() is a system call to kernel which says
+			"Hey kernel: Next, please! Give me whatever connection is
+			currently waiting at the front of your queue for this port."
+		*/
 		connection, connectionError := listener.Accept()
 		if connectionError != nil {
 			fmt.Println("Connection acceptance error", connectionError)
