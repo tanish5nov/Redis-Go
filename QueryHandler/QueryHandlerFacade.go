@@ -2,6 +2,7 @@ package QueryHandler
 
 import (
 	"BuildYourOwnRedis/QueryHandler/ConcreteQueryHandlers/COMMANDHandler"
+	"BuildYourOwnRedis/QueryHandler/ConcreteQueryHandlers/ECHOHandler"
 	"BuildYourOwnRedis/QueryHandler/ConcreteQueryHandlers/PINGHandler"
 	"BuildYourOwnRedis/RESPParser"
 	"fmt"
@@ -28,6 +29,9 @@ func QueryHandlerFacade(data string) string {
 	} else if COMMANDHandler.IsCOMMANDRequest(arrayOfBulkStrings) {
 		commandHandler := &COMMANDHandler.COMMANDHandler{}
 		return commandHandler.Handler(arrayOfBulkStrings)
+	} else if ECHOHandler.IsECHORequest(arrayOfBulkStrings) {
+		echoHandler := &ECHOHandler.ECHOHandler{}
+		return echoHandler.Handler(arrayOfBulkStrings)
 	}
 	return "UPDATE: RIGHT NOW WE ONLY SUPPORT PING"
 }
